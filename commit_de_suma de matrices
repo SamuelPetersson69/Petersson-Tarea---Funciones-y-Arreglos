@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// esta funcion se usa para generar el numero aleatorio de toda la visda.
+int generarNumeroAleatorio() {
+    return rand() % 101;
+}
+
+// esta funcion genera matrices aleatorias y ay
+void generarMatrizAleatoria(int filas, int columnas, int matriz[filas][columnas]) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = generarNumeroAleatorio();
+        }
+    }
+}
+
+// esto sikmplemente muestra la funcion de toda la vida.
+void mostrarMatriz(int filas, int columnas, int matriz[filas][columnas]) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// este ejercicio de funcion se lo pedi a gogle y simplemente se usa para sumar las matrices
+void sumarMatrices(int filas, int columnas, int matrizA[filas][columnas], int matrizB[filas][columnas], int resultado[filas][columnas]) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
+        }
+    }
+}
+
+int main() {
+    int filas, columnas;
+
+    printf("Ingrese el número de filas para las matrices: ");
+    scanf("%d", &filas);
+
+    printf("Ingrese el número de columnas para las matrices: ");
+    scanf("%d", &columnas);
+
+    if (filas <= 0 || columnas <= 0) {
+        printf("Las dimensiones ingresadas no son válidas.\n");
+        return 1;
+    }
+
+    int matrizA[filas][columnas], matrizB[filas][columnas], resultado[filas][columnas];
+
+    srand(time(NULL));
+
+    //no sabia que existia este tipo de cosas aqui requeri algo de ayuda
+    generarMatrizAleatoria(filas, columnas, matrizA);
+    generarMatrizAleatoria(filas, columnas, matrizB);
+
+    // este print muestra la matriz
+    printf("\nMatriz A:\n");
+    mostrarMatriz(filas, columnas, matrizA);
+
+    printf("\nMatriz B:\n");
+    mostrarMatriz(filas, columnas, matrizB);
+
+    // Sesto suma las matrices
+    sumarMatrices(filas, columnas, matrizA, matrizB, resultado);
+
+    // esto muestra la suma y ya
+    printf("\nSuma de Matrices (A + B):\n");
+    mostrarMatriz(filas, columnas, resultado);
+
+    return 0;
+}
